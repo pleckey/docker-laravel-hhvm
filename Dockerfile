@@ -19,7 +19,7 @@ RUN service hhvm stop
 RUN service nginx stop
 
 # link HHVM to the php-cli
-RUN ln -s /usr/bin/hhvm /usr/bin/php
+RUN /usr/bin/update-alternatives --install /usr/bin/php php /usr/bin/hhvm 60
 
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php

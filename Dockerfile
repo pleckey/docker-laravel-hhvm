@@ -30,9 +30,7 @@ RUN chmod +x /usr/local/bin/composer
 ADD hhvm.conf /etc/nginx/
 ADD hhvm.ini /etc/supervisord.d/
 
-# configure nginx
-RUN mkdir /var/www
-RUN chown -R nginx:nginx /var/www
+# disable nginx default site
 RUN unlink /etc/nginx/sites-enabled/default
 
 ADD nginx.conf /etc/nginx/

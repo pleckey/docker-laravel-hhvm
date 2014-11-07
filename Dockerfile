@@ -15,8 +15,12 @@ RUN echo deb http://dl.hhvm.com/ubuntu trusty main | sudo tee /etc/apt/sources.l
 # update sources and install nginx / HHVM
 RUN apt-get update
 RUN apt-get install -y nginx hhvm
+
+# stop and disable the services - supervisor runs them
 RUN service hhvm stop
 RUN service nginx stop
+RUN update-rc.d -f nginx remove
+RUN update-rc.d -f hhvm remove
 
 # link HHVM to the php-cli
 RUN /usr/bin/update-alternatives --install /usr/bin/php php /usr/bin/hhvm 60
@@ -35,11 +39,8 @@ RUN unlink /etc/nginx/sites-enabled/default
 
 ADD nginx.conf /etc/nginx/
 ADD nginx.ini /etc/supervisord.d/
-ADD app.conf /etc/nginx/sites-available/app
+ADD web.conf /etc/nginx/sites-available/app
 RUN ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/app
-
-# get things running
-RUN service supervisord restart
 
 # expose port 80
 EXPOSE 80

@@ -3,7 +3,7 @@ FROM ubuntu:latest
 MAINTAINER Patrick Leckey <pat.leckey@gmail.com>
 
 RUN apt-get update
-RUN apt-get install -y curl wget build-essential python-software-properties supervisor
+RUN apt-get install -y curl wget build-essential software-properties-common supervisor
 
 # install the nginx/stable repo
 RUN add-apt-repository -y ppa:nginx/stable

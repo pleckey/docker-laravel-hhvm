@@ -42,3 +42,6 @@ RUN ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/app
 
 # get things running
 RUN service supervisord restart
+
+# expose port 80
+EXPOSE 80
